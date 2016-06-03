@@ -58,6 +58,14 @@ var HTMLonlineURL = '<br><a href="#">%data%</a>';
 var internationalizeButton = '<button>Internationalize</button>';
 var googleMap = '<div id="map"></div>';
 
+//Additional section
+var HTMLtravelStart = '<div class="travel-entry"></div>';
+var HTMLtravelTitle = '<a href="#">%data%</a>';
+var HTMLtravelDates = '<div class="date-text">%data%</div>';
+var HTMLtravelLocation = '<div class="location-text">%data%</div>';
+var HTMLtravelDescription = '<p><br>%data%</p>';
+
+
 
 /*
 The International Name challenge in Lesson 2 where you'll create a function that will need this helper code to run. Don't delete! It hooks up your code to the button you'll be appending.
@@ -106,7 +114,10 @@ function initializeMap() {
   var locations;
 
   var mapOptions = {
-    disableDefaultUI: true
+    disableDefaultUI: true,
+    //Disabling the zoom and drag
+    // scrollwheel: false,
+    // draggable: false
   };
 
   /*
@@ -127,6 +138,12 @@ function initializeMap() {
     // adds the single location property from bio to the locations array
     locations.push(bio.contacts.location);
 
+
+    //iterates through travel locations and appends location to array
+    travel.trips.forEach(function(trip){
+      locations.push(trip.location);
+    });
+
     // iterates through school locations and appends each location to
     // the locations array. Note that forEach is used for array iteration
     // as described in the Udacity FEND Style Guide:
@@ -142,6 +159,7 @@ function initializeMap() {
     work.jobs.forEach(function(job){
       locations.push(job.location);
     });
+
 
     return locations;
   }
@@ -195,6 +213,7 @@ function initializeMap() {
     if (status == google.maps.places.PlacesServiceStatus.OK) {
       createMapMarker(results[0]);
     }
+    else {console.log(status);}
   }
 
   /*
@@ -208,12 +227,11 @@ function initializeMap() {
     var service = new google.maps.places.PlacesService(map);
 
     // Iterates through the array of locations, creates a search object for each location
-      locations.forEach(function(place){
+    locations.forEach(function(place) {
       // the search request object
       var request = {
         query: place
       };
-
       // Actually searches the Google Maps API for location data and runs the callback
       // function with the search results after each search.
       service.textSearch(request, callback);
@@ -229,7 +247,6 @@ function initializeMap() {
   // pinPoster(locations) creates pins on the map for each location in
   // the locations array
   pinPoster(locations);
-
 }
 
 /*
@@ -241,7 +258,9 @@ window.addEventListener('load', initializeMap);
 
 // Vanilla JS way to listen for resizing of the window
 // and adjust map bounds
+
 window.addEventListener('resize', function(e) {
   // Make sure the map bounds get updated on page resize
- map.fitBounds(mapBounds);
+ google.maps.event.trigger(map, 'resize');
+map.setZoom( map.getZoom() );
 });

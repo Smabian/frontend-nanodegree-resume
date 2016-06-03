@@ -2,14 +2,14 @@
 var bio = {
   //Providing info that should be used in this object
   'name' :'Martin Wenzel',
-  'role' : 'Web Developer',
+  'role' : 'Project & Account Manager',
   'contacts' : {
     'mobile' : '+4917666804004',
     'email' : 'martin.wenzel@outlook.com',
     'github' : 'smabian',
     'location' : 'Stuttgart'
   },
-  'welcomeMessage' : 'Project & Account Manager with strong IT know-how',
+  'welcomeMessage' : 'I joined HP Germany in 2011 for my studies in business information systems at the Cooperative State University in Stuttgart. Gaining work expereince in business and IT during various internships in different business units in Germany and USA. After finishing my studies I started to work full-time as Project and Account Manager for Hewlett Packard Enterprise.',
   'skills' : [
     'HTML',
     'CSS',
@@ -27,12 +27,22 @@ var bio = {
   display: function (){
     $('#header').prepend(HTMLheaderRole.replace('%data%', this.role));
     $('#header').prepend(HTMLheaderName.replace('%data%', this.name));
-    $('#topContacts').append(HTMLmobile.replace('%data%', this.contacts.mobile));
-    $('#topContacts').append(HTMLemail.replace('%data%', this.contacts.email));
-    $('#topContacts').append(HTMLgithub.replace('%data%', this.contacts.github));
-    $('#topContacts').append(HTMLlocation.replace('%data%', this.contacts.location));
     $('#header').append(HTMLbioPic.replace('%data%', this.biopic));
     $('#header').append(HTMLwelcomeMsg.replace('%data%', this.welcomeMessage));
+
+    var formattedMobile = HTMLmobile.replace('%data%', this.contacts.mobile);
+    var formattedEmail = HTMLemail.replace('%data%', this.contacts.email);
+    var formattedGithub = HTMLgithub.replace('%data%', this.contacts.github);
+    var formattedLocation = HTMLlocation.replace('%data%', this.contacts.location);
+
+    $('#topContacts').append(formattedMobile);
+    $('#topContacts').append(formattedEmail);
+    $('#topContacts').append(formattedGithub);
+    $('#topContacts').append(formattedLocation);
+    $('#footerContacts').append(formattedMobile);
+    $('#footerContacts').append(formattedEmail);
+    $('#footerContacts').append(formattedGithub);
+    $('#footerContacts').append(formattedLocation);
 
     $('#header').append(HTMLskillsStart);
     for (var i=0; i<this.skills.length; i++){
@@ -53,17 +63,17 @@ var work = {
   },
   {
     'employer' : 'Hewlett Packard Enterprise',
-    'title' : 'Cooperative Student',
-    'location' : 'Boeblingen, Germany',
-    'dates' : 'September 2011 - September 2014',
-    'description' : 'Cooperative Student at Hewlett Packard Enterprise, doing several internships in various businees units'
-  },
-  {
-    'employer' : 'Hewlett Packard Enterprise',
     'title' : 'International Internship',
     'location' : 'Palo Alto, California',
     'dates' : 'May 2013 - August 2013',
     'description' : 'Internship in Houston, TX and Palo Alto, CA at Hewlett Packard Enterprise'
+  },
+  {
+    'employer' : 'Hewlett Packard Enterprise',
+    'title' : 'Cooperative Student',
+    'location' : 'Boeblingen, Germany',
+    'dates' : 'September 2011 - September 2014',
+    'description' : 'Cooperative Student at Hewlett Packard Enterprise, doing several internships in various businees units'
   },
   {
     'employer' : 'KBF',
@@ -96,7 +106,7 @@ var projects = {
     'title' : 'Sample Project',
     'dates' : '2016',
     'description' : 'Placeholder for project description',
-    'images' : ['images/197x148.gif', 'images/197x148.gif']
+    'images' : ['images/portfolio1.png', 'images/portfolio2.png']
   }],
   //Display function to add the objects information into the helper.js structure
   display : function(){
@@ -141,7 +151,7 @@ var education = {
     'name' : 'Gorham Fayette High School',
     'degree' : 'High School Degree',
     'dates' : 'July 2006 - June 2007',
-    'location' : 'Fayette, OH, USA',
+    'location' : 'Fayette, Ohio',
     'majors' : ['General studies'],
     'url' : 'http://www.fayettesch.org/'
   }],
@@ -186,6 +196,48 @@ var education = {
   }
 };
 
+//Additional object travel
+var travel = {
+  //Providing info that should be used in this object
+  'trips' : [
+  {
+    'title': 'Backpacking through Brazil',
+    'dates': '2013',
+    'location': 'Rio De Janeiro, Brazil',
+    'description': 'Three week backpacking trip through Brazil (Rio, Sao Paolo, Florianopolis, Ilha Grande, Foz de Iguazu)'
+  },
+  {
+    'title': 'Roadtrip on the US west coast',
+    'dates' : '2014',
+    'location' : 'Los Angeles, USA',
+    'description' : 'Three week roadtrip on the US Westcoast (Los Angeles, San Diego, Las Vegas, Sillicon Valley / San Francisco)'
+  },
+  {
+    'title': 'Backpacking through Thailand',
+    'dates' : '2015',
+    'location': 'Thailand',
+    'description' : 'Three week backpacking trop through Thailand (Bangkok, Koh Samui, Koh Tao, Koh Phi Phi, Phuket)'
+  },
+  {
+    'title' : 'Backpacking through the Dominican Repuplic',
+    'dates' : '2016',
+    'location' : 'Dominican Republic',
+    'description' : 'Two week backpacking trip through the dominican repuplic (Punta Cana, Santo Domingo, Puerto Platta, Cabarette)'
+  }],
+  //Display function to add the objects information into the helper.js structure
+  display : function() {
+    for (trip in this.trips){
+      if(this.trips.hasOwnProperty(trip)){
+        $('#travel').append(HTMLtravelStart);
+        $('.travel-entry:last').append(HTMLtravelTitle.replace('%data%',this.trips[trip].title));
+        $('.travel-entry:last').append(HTMLtravelDates.replace('%data%',this.trips[trip].dates));
+        $('.travel-entry:last').append(HTMLtravelLocation.replace('%data%',this.trips[trip].location));
+        $('.travel-entry:last').append(HTMLtravelDescription.replace('%data%',this.trips[trip].description));
+      }
+    }
+  }
+};
+
 //Providing info that should be used in this object
 function displayMap(){
   $('#mapDiv').append(googleMap);
@@ -196,6 +248,7 @@ bio.display();
 work.display();
 education.display();
 projects.display();
+travel.display()
 displayMap();
 
 

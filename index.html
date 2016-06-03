@@ -23,6 +23,7 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
     <title>Resume</title>
 
     <!-- Load the page styles. -->
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,200' rel='stylesheet'>
     <link href="css/style.css" rel="stylesheet">
 
     <!--
@@ -48,7 +49,6 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
   Google Map to your resume!
   -->
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places"></script>
-
     <meta name="viewport" content="width=device-width">
 </head>
 
@@ -74,7 +74,12 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
         <div id="education" class="gray">
             <h2>Education</h2>
         </div>
-        <div id="mapDiv">
+        <!--Additional optional section -->
+        <div id="travel">
+            <h2>Travel</h2>
+        </div>
+        <!-- -->
+        <div id="mapDiv" class="gray">
             <h2>Where I've Lived and Worked</h2>
         </div>
         <div id="lets-connect" class="dark-gray">
@@ -127,6 +132,9 @@ need to load. You'll see a lot of <link>s to CSS files for styles and
         }
         if (document.getElementsByClassName('education-entry').length === 0) {
             document.getElementById('education').style.display = 'none';
+        }
+        if (document.getElementsByClassName('travel-entry').length === 0) {
+            document.getElementById('travel').style.display = 'none';
         }
         if (document.getElementsByClassName('flex-item').length === 0) {
             document.getElementById('lets-connect').style.display = 'none';
