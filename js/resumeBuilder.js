@@ -9,7 +9,7 @@ var bio = {
     'github' : 'smabian',
     'location' : 'Stuttgart'
   },
-  'welcomeMessage' : 'I joined HP Germany in 2011 for my studies in business information systems at the Cooperative State University in Stuttgart. Gaining work expereince in business and IT during various internships in different business units in Germany and USA. After finishing my studies I started to work full-time as Project and Account Manager for Hewlett Packard Enterprise.',
+  'welcomeMessage' : '25 year old with a passion for IT and the urge to travel the world. Now looking for a new challenge after gaining experience in business and project management during different positions in Germany and USA at Hewlett Packard Enterprise.',
   'skills' : [
     'HTML',
     'CSS',
@@ -103,9 +103,9 @@ var projects = {
   //Providing info that should be used in this object
   'projects' : [
   {
-    'title' : 'Sample Project',
+    'title' : 'Responsive portfolio page',
     'dates' : '2016',
-    'description' : 'Placeholder for project description',
+    'description' : 'Responsive website that displays images, descriptions and links to each of the portfolio projects completed throughout the course of the Front-End Web Developer Nanodegree.',
     'images' : ['images/portfolio1.png', 'images/portfolio2.png']
   }],
   //Display function to add the objects information into the helper.js structure
@@ -203,7 +203,7 @@ var travel = {
   {
     'title': 'Backpacking through Brazil',
     'dates': '2013',
-    'location': 'Rio De Janeiro, Brazil',
+    'location': 'Brazil',
     'description': 'Three week backpacking trip through Brazil (Rio, Sao Paolo, Florianopolis, Ilha Grande, Foz de Iguazu)'
   },
   {
@@ -226,7 +226,7 @@ var travel = {
   }],
   //Display function to add the objects information into the helper.js structure
   display : function() {
-    for (trip in this.trips){
+    for (var trip in this.trips){
       if(this.trips.hasOwnProperty(trip)){
         $('#travel').append(HTMLtravelStart);
         $('.travel-entry:last').append(HTMLtravelTitle.replace('%data%',this.trips[trip].title));
@@ -248,7 +248,7 @@ bio.display();
 work.display();
 education.display();
 projects.display();
-travel.display()
+travel.display();
 displayMap();
 
 
